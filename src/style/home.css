@@ -12,7 +12,10 @@ header{
     display: flex;
 }
 
-button{
+.info{
+    
+    display: flex;
+    align-items: center;
     font-size: 25px;
     font-family: pt sans-serif;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
