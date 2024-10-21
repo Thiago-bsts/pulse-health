@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="../style/home.css">
     <title>Home</title>
 </head>
 <body>
     <header>
-        <a href="" class="info">cadstrar paciente</a>
-        <a href="" class="info">Monitores</a>
-        <a href="" class="info">Pulseiras</a>
-        <a href="" class="info">sair</a>
+        <a href="#" onclick="openModal()" class="info"><i class="fa-solid fa-user-plus"></i> cadastrar paciente</a>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <label> </label>
+                <input >
+            </div>
+        </div>
+        <a href="../pages/monitores.html" class="info">Monitores</a>
+        <a href="../pages/pulseiras.html" class="info">Pulseiras</a>
+        <a href="../index.html" class="info">sair</a>
     </header>
     <section>
         <div class="container">
@@ -24,6 +32,6 @@
             </div>
         </div>
     </section>
-    <script src="Home.js"></script>
+    <script src="HomeScript.js"></script>
 </body>
 </html>
