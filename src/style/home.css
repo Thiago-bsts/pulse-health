@@ -15,8 +15,14 @@ body{
     border-radius: 15px;
 }
 
+#icon{
+    color:  rgb(28, 145, 145);
+    
+}
+
 .info:hover{
-    background-color: aqua;
+    color: #4786aa;
+    color: white;
 }
 
 * {
@@ -89,6 +95,7 @@ body{
 
 }
 
+
 .popup-content {
     position: relative;
     text-align: center;
@@ -133,7 +140,7 @@ button {
     display: block;
     font-size: 25px;
     font-family: pt sans-serif;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: 5px solid black ; 
     width: 150px;
     height: 80px;
     border-radius: 15px;
@@ -157,9 +164,6 @@ i{
     border-radius: 15px;
 }
 
-button:hover {
-    background-color: aqua;
-}
 
 #exit{
     margin-top: 55vh;
@@ -210,8 +214,29 @@ h1{
 }
 
 #listaPacientes li {
-    background-color: #f4f4f4;
+    
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
+}
+
+.paciente-item {
+    flex-direction: column;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    color: white; /* Mantenha a cor do texto como branca para contraste */
+    list-style-type: none;
+}
+
+.prioridade-baixa {
+    background-color: green; /* Verde para baixa prioridade */
+}
+
+.prioridade-media {
+    background-color: orange; /* Laranja para média prioridade */
+}
+
+.prioridade-alta {
+    background-color: red; /* Vermelho para alta prioridade */
 }

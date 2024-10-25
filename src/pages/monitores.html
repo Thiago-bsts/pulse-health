@@ -3,19 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=fitness_tracker" />
+    <link rel="stylesheet" href="../style/monitores.css">
+    <title>Home</title>
 </head>
 <body>
-    <header>
-        <a href="">cadstrar paciente</a>
-            <a href="">Monitores</a>
-            <a href="">Pulseiras</a>
-            <a href="">sair</a>
-        </header>
-        <section>
-            <div class="container">
-                
-            </div>
-        </section>    
+        <i class="fas fa-bars" id="menuIcon"></i>
+
+        <!-- Barra lateral -->
+        <div id="sidebar" class="sidebar">
+            
+            <button id="openPopupBtn"><i class="fa-solid fa-user-plus"></i> Ficha</button>
+            <button id="myButton" href="../pages/monitores.html" class="info" ><i class="fa-solid fa-user-nurse"></i>  Monitores</button>
+            <script>
+                document.getElementById('myButton').addEventListener('click', function() {
+                    window.location.href = 'monitores.html'; // Substitua 'novaPagina.html' pelo caminho desejado
+                });
+            </script>
+            <button  href="../pages/pulseiras.html" class="info"><span class="material-symbols-outlined" id="icon">fitness_tracker</span>  Pulseiras</button>
+            <script>
+                document.getElementById('icon').addEventListener('click', function() {
+                    window.location.href = 'pulseiras.html'; // Substitua 'novaPagina.html' pelo caminho desejado
+                });
+            </script>
+            <button  class="info" id="exit" herf="../index.html"><i class="fa-solid fa-arrow-right-from-bracket"></i>  Sair</button>
+            <script>
+                document.getElementById('exit').addEventListener('click', function() {
+                    window.location.href = '../index.html'; // Substitua 'novaPagina.html' pelo caminho desejado
+                });
+            </script>
+        </div>
+                <div id="popupForm" class="popup">
+                    <div class="popup-content">
+                        <span class="closeBtn">&times;</span>
+                        <h2>Cadastrar Paciente</h2>
+                        <form id="cadastroPacienteForm">
+                            <label for="nome">Nome:</label>
+                            <input type="text" id="nome" name="nome" required><br>
+
+                            <label for="idade">Idade:</label>
+                            <input type="number" id="idade" name="idade" required><br>
+            
+                            <label for="prioridade">Prioridade:</label>
+                            <select id="prioridade" name="prioridade" required>
+                                <option value="Baixa">Baixa</option>
+                                <option value="Média">Média</option>
+                                <option value="Alta">Alta</option>
+                            </select><br><br>
+
+                            <button class="cad" type="submit">Cadastrar</button>
+                        </form>
+                    </div>
+                </div>
+    <section>
+        <div class="container">
+            
+        </div>
+    </section>
+    
+    <script src="../monitores.js"></script>
 </body>
 </html>
