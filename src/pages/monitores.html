@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=fitness_tracker" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style/monitores.css">
-    <title>Home</title>
+    <title>Monitores</title>
 </head>
 <body>
         <i class="fas fa-bars" id="menuIcon"></i>
@@ -57,8 +58,50 @@
                     </div>
                 </div>
     <section>
-        <div class="container">
+        <div class="container1">
+            <div class="header">
+                <span id="titulo">Cadastro de Monitores</span>
+                <button class="btncad" onclick="openModal()" id="new">Incluir</i></button>
+              </div>
+          
+              <div class="divTable">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>Email</th>
+                      <th>Cargo</th>
+                      <th class="acao">Editar</th>
+                      <th class="acao">Excluir</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+
+            <div class="modal-container">
+                <div class="modal">
+                  <form>
+                    <label for="m-nome">Nome</label>
+                    <input id="m-nome" type="text" required />
             
+                    <label for="m-Email">Email</label>
+                    <input id="m-Email" type="email" required />
+            
+                    <label for="m-cargo">cargo</label>
+                    <input id="m-cargo" type="text" required />
+
+                    <label for="m-senha">Senha</label>
+                    <input id="m-seha" type="password" required />
+
+                    <label for="m-confirmaSenha">confirma Senha</label>
+                    <input id="m-cofirmaSenha" type="password" required />
+                    
+                    <button id="btnSalvar">Salvar</button>
+                  </form>
+                </div>
+              </div>
         </div>
     </section>
     
