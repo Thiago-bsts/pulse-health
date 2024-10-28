@@ -134,13 +134,12 @@ form input {
 }
 
 button {
-    
     text-align: center;
     text-decoration: none;
     display: block;
     font-size: 25px;
     font-family: pt sans-serif;
-    box-shadow: 5px solid black ; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     width: 150px;
     height: 80px;
     border-radius: 15px;
