@@ -82,6 +82,7 @@ body{
     cursor: pointer;
     z-index: 2;
     color: #0c405e;
+    margin-left: 30px;
 }
 
 /*pop-up */
@@ -143,7 +144,7 @@ form input {
 button {
     text-align: center;
     text-decoration: none;
-    display: block;
+
     font-size: 25px;
     font-family: pt sans-serif;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
@@ -172,7 +173,7 @@ i{
 
 
 #exit{
-    margin-top: 55vh;
+    margin-top: 46vh;
 }
 
 form select {
@@ -196,7 +197,7 @@ section{
 }
 .container1{
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-    width: 200vh;
+    width: 199vh;
     height: 97vh;
     background-color: white;
     border-radius: 15px;
@@ -208,14 +209,24 @@ section{
    
     cursor: pointer;
   }
+
   
-  .container {
-    width: 90%;
-    height: 80%;
-    border-radius: 10px;
-    background: white;
-  }
-  
+  .modal-container2 {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.modal-container2.show {
+    display: flex; /* Mostra a modal */
+}
   .header {
     min-height: 70px;
     display: flex;
@@ -224,6 +235,15 @@ section{
     margin: auto 12px;
   }
   
+.modal{
+  padding: 30px;
+    background-color: rgb(255, 255, 255);
+    width: 500px;
+    height: 560px;
+    border-radius: 15px;
+
+}
+
   .header span {
     margin-left: 80vh;
     font-weight: 900;
@@ -244,8 +264,6 @@ section{
   
   .divTable {
     padding: 10px;
-    width: auto; 
-    height:inherit; 
     overflow:auto;
   }
   
@@ -260,7 +278,7 @@ section{
   }
   
   table {
-    width: 100%;
+    width: 190vh;
     border-spacing: 10px;
     word-break: break-all;
     border-collapse: collapse;
@@ -296,9 +314,35 @@ section{
   }
   
   tbody tr td.acao {
+    
+    gap: 100px;
     text-align: center;
   }
 
+  .acao button {
+    width: 90px;
+    height: 70px;
+    padding: 5px ; /* Diminui o tamanho dos botões */
+    font-size: 25px; /* Reduz o tamanho da fonte */
+    margin-right: 100px; /* Adiciona margem entre eles */
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.btn-editar {
+    background-color: #4CAF50; /* Cor do botão Editar */
+    color: white;
+    margin-right: px; /* Margem à direita para separar do botão Excluir */
+}
+
+.btn-excluir {
+    background-color: #f44336; /* Cor do botão Excluir */
+    color: white;
+}
+
+#btnSalvar{
+  margin-left: 140px;
+}
   @keyframes modal {
     from {
       opacity: 0;

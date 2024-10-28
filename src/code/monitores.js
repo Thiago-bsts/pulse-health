@@ -68,24 +68,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // CURD
 const tbody = document.querySelector("tbody");
-const modalContainer = document.querySelector(".modal-container");
+const modalContainer = document.querySelector(".modal-container2");
 const form = document.querySelector("form");
 const btnSalvar = document.getElementById("btnSalvar");
 
 let editIndex = null; // Armazena o índice da linha que está sendo editada
 
 // Abre o modal para adicionar ou editar um monitor
-function openModal() {
-    modalContainer.style.display = "flex";
+function openModal2() {
+    modalContainer.classList.add("show"); // Exibe a modal
     form.reset();
     editIndex = null;
 }
 
-// Fecha o modal
 function closeModal() {
-    modalContainer.style.display = "none";
+    modalContainer.classList.remove("show"); // Oculta a modal
 }
-
 // Adiciona ou atualiza monitor na tabela
 btnSalvar.addEventListener("click", function(event) {
     event.preventDefault();
@@ -114,12 +112,12 @@ btnSalvar.addEventListener("click", function(event) {
 function addMonitor(nome, email, cargo) {
     const row = document.createElement("tr");
     row.innerHTML = `
-        <td>${nome}</td>
-        <td>${email}</td>
-        <td>${cargo}</td>
-        <td class="acao"><button onclick="editMonitor(this)">Editar</button></td>
-        <td class="acao"><button onclick="deleteMonitor(this)">Excluir</button></td>
-    `;
+    <td>${nome}</td>
+    <td>${email}</td>
+    <td>${cargo}</td>
+    <td class="acao"><button class="btn-editar" onclick="editMonitor(this)">Editar</button></td>
+    <td class="acao"><button class="btn-excluir" onclick="deleteMonitor(this)">Excluir</button></td>
+`;
     tbody.appendChild(row);
 }
 
@@ -136,7 +134,7 @@ function editMonitor(button) {
     document.getElementById("m-Email").value = email;
     document.getElementById("m-cargo").value = cargo;
 
-    openModal();
+    openModal2();
 }
 
 // Função para atualizar um monitor

@@ -9,38 +9,59 @@
     <title>Home</title>
 </head>
 <body>
-        <i class="fas fa-bars" id="menuIcon"></i>
+    <i class="fas fa-bars" id="menuIcon"></i>
 
-        <!-- Barra lateral -->
-        <div id="sidebar" class="sidebar">
-            
-            <button id="openPopupBtn"><i class="fa-solid fa-user-plus"></i> Ficha</button>
-            <button href="../pages/monitores.html" class="info" ><i class="fa-solid fa-user-nurse"></i>  Monitores</button>
-            <button href="../pages/pulseiras.html" class="info"><span class="material-symbols-outlined" id="icon">fitness_tracker</span>  Pulseiras</button>
-            <button href="../index.html" class="info" id="exit" herf="../index.html"><i class="fa-solid fa-arrow-right-from-bracket"></i>  Sair</button>
-        </div>
-                <div id="popupForm" class="popup">
-                    <div class="popup-content">
-                        <span class="closeBtn">&times;</span>
-                        <h2>Cadastrar Paciente</h2>
-                        <form id="cadastroPacienteForm">
-                            <label for="nome">Nome:</label>
-                            <input type="text" id="nome" name="nome" required><br>
+    <!-- Barra lateral -->
+    <div id="sidebar" class="sidebar">
+        
+        <button id="openPopupBtn"><i class="fa-solid fa-user-plus"></i> Ficha</button>
+        <button id="home" href="../pages/home.html" class="info" ><i class="fa-solid fa-house"></i>  Home</button>
+        <script>
+            document.getElementById('home').addEventListener('click', function() {
+                window.location.href = 'home.html';
+            });
+        </script>
+            <button id="myButton" href="../pages/monitores.html" class="info" ><i class="fa-solid fa-user-doctor"></i>  Monitores</button>
+            <script>
+                document.getElementById('myButton').addEventListener('click', function() {
+                    window.location.href = 'monitores.html'; 
+                });
+            </script>
+        <button  href="../pages/pulseiras.html" id="btnP" class="info"><span class="material-symbols-outlined" id="icon">fitness_tracker</span>  Pulseiras</button>
+        <script>
+            document.getElementById('btnP').addEventListener('click', function() {
+                window.location.href = 'pulseiras.html'; 
+            });
+        </script>
+        <button  class="info" id="exit" herf="../index.html"><i class="fa-solid fa-arrow-right-from-bracket"></i>  Sair</button>
+        <script>
+            document.getElementById('exit').addEventListener('click', function() {
+                window.location.href = '../index.html'; 
+            });
+        </script>
+    </div>
+            <div id="popupForm" class="popup">
+                <div class="popup-content">
+                    <span class="closeBtn">&times;</span>
+                    <h2>Cadastrar Paciente</h2>
+                    <form id="cadastroPacienteForm">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" required><br>
 
-                            <label for="idade">Idade:</label>
-                            <input type="number" id="idade" name="idade" required><br>
-            
-                            <label for="prioridade">Prioridade:</label>
-                            <select id="prioridade" name="prioridade" required>
-                                <option value="Baixa">Baixa</option>
-                                <option value="Média">Média</option>
-                                <option value="Alta">Alta</option>
-                            </select><br><br>
+                        <label for="idade">Idade:</label>
+                        <input type="number" id="idade" name="idade" required><br>
+        
+                        <label for="prioridade">Prioridade:</label>
+                        <select id="prioridade" name="prioridade" required>
+                            <option value="Baixa">Baixa</option>
+                            <option value="Média">Média</option>
+                            <option value="Alta">Alta</option>
+                        </select><br><br>
 
-                            <button class="cad" type="submit">Cadastrar</button>
-                        </form>
-                    </div>
+                        <button class="cad" type="submit">Cadastrar</button>
+                    </form>
                 </div>
+            </div>
     <section>
         <div class="container">
             
@@ -53,6 +74,6 @@
             </div>
         </div>
     </section>
-    <script src="../home.js"></script>
+    <script src="../code/home.js"></script>
 </body>
 </html>
