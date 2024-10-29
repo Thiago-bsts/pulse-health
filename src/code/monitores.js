@@ -67,94 +67,129 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // CURD
+import { db, auth } from './Firebase.js';
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+// Seleciona elementos HTML
 const tbody = document.querySelector("tbody");
 const modalContainer = document.querySelector(".modal-container2");
 const form = document.querySelector("form");
 const btnSalvar = document.getElementById("btnSalvar");
 
-let editIndex = null; // Armazena o índice da linha que está sendo editada
+let editId = null;  // Guarda o ID do monitor para edição
 
-// Abre o modal para adicionar ou editar um monitor
+// Abrir Modal
 function openModal2() {
-    modalContainer.classList.add("show"); // Exibe a modal
+    console.log("Abrindo modal...");
+    modalContainer.classList.add("show");
     form.reset();
-    editIndex = null;
+    editId = null;
 }
 
 function closeModal() {
-    modalContainer.classList.remove("show"); // Oculta a modal
+    console.log("Fechando modal...");
+    modalContainer.classList.remove("show");
 }
-// Adiciona ou atualiza monitor na tabela
-btnSalvar.addEventListener("click", function(event) {
+// Evento de Salvamento (Adicionar/Editar monitor)
+btnSalvar.addEventListener("click", async function(event) {
     event.preventDefault();
+
+    // Coleta dados do formulário
     const nome = document.getElementById("m-nome").value;
     const email = document.getElementById("m-Email").value;
     const cargo = document.getElementById("m-cargo").value;
+    const senha = document.getElementById("m-senha").value;
+    const confirmaSenha = document.getElementById("m-confirmaSenha").value;
 
-    // Verifica se todos os campos estão preenchidos
-    if (!nome || !email || !cargo) {
+    if (!nome || !email || !cargo || !senha || !confirmaSenha) {
         alert("Por favor, preencha todos os campos.");
         return;
     }
 
-    if (editIndex === null) {
-        // Adiciona um novo monitor
-        addMonitor(nome, email, cargo);
-    } else {
-        // Edita monitor existente
-        updateMonitor(editIndex, nome, email, cargo);
+    if (senha !== confirmaSenha) {
+        alert("As senhas não coincidem.");
+        return;
     }
 
-    closeModal();
+    try {
+        if (editId === null) {
+            // Cadastrar novo monitor e usuário com autenticação
+            const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+            const userId = userCredential.user.uid;
+            await addDoc(collection(db, "monitores"), { nome, email, cargo, userId });
+        } else {
+            // Atualizar monitor existente no Firestore
+            const monitorRef = doc(db, "monitores", editId);
+            await updateDoc(monitorRef, { nome, email, cargo });
+        }
+        
+        loadMonitors();  // Carrega lista de monitores
+        closeModal();    // Fecha modal
+    } catch (error) {
+        console.error("Erro ao salvar monitor: ", error.message);
+        alert("Erro ao salvar monitor: " + error.message);
+    }
 });
 
-// Função para adicionar um monitor à tabela
-function addMonitor(nome, email, cargo) {
+const app = initializeApp(firebaseConfig);
+console.log("Firebase inicializado:", app);
+
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOM totalmente carregado e analisado");
+    loadMonitors(); // Carrega os monitores quando o DOM está pronto
+});
+
+// Função para Carregar Monitores da Firestore
+async function loadMonitors() {
+    tbody.innerHTML = "";
+    const snapshot = await getDocs(collection(db, "monitores"));
+    snapshot.forEach(doc => {
+        const monitor = doc.data();
+        addMonitorToTable(doc.id, monitor.nome, monitor.email, monitor.cargo);
+    });
+}
+
+// Função para Adicionar Monitor na Tabela HTML
+function addMonitorToTable(id, nome, email, cargo) {
     const row = document.createElement("tr");
     row.innerHTML = `
-    <td>${nome}</td>
-    <td>${email}</td>
-    <td>${cargo}</td>
-    <td class="acao"><button class="btn-editar" onclick="editMonitor(this)">Editar</button></td>
-    <td class="acao"><button class="btn-excluir" onclick="deleteMonitor(this)">Excluir</button></td>
-`;
+        <td>${nome}</td>
+        <td>${email}</td>
+        <td>${cargo}</td>
+        <td class="acao"><button class="btn-editar" onclick="editMonitor('${id}')">Editar</button></td>
+        <td class="acao"><button class="btn-excluir" onclick="deleteMonitor('${id}')">Excluir</button></td>
+    `;
     tbody.appendChild(row);
 }
 
-// Função para editar um monitor
-function editMonitor(button) {
-    const row = button.closest("tr");
-    editIndex = Array.from(tbody.children).indexOf(row);
+// Editar Monitor
+window.editMonitor = async function(id) {
+    editId = id;
+    const docSnap = await getDoc(doc(db, "monitores", id));
+    if (docSnap.exists()) {
+        const monitor = docSnap.data();
+        document.getElementById("m-nome").value = monitor.nome;
+        document.getElementById("m-Email").value = monitor.email;
+        document.getElementById("m-cargo").value = monitor.cargo;
+        openModal2();
+    } else {
+        console.log("Documento não encontrado!");
+    }
+};
 
-    const nome = row.children[0].innerText;
-    const email = row.children[1].innerText;
-    const cargo = row.children[2].innerText;
+// Excluir Monitor
+window.deleteMonitor = async function(id) {
+    await deleteDoc(doc(db, "monitores", id));
+    loadMonitors();
+};
 
-    document.getElementById("m-nome").value = nome;
-    document.getElementById("m-Email").value = email;
-    document.getElementById("m-cargo").value = cargo;
-
-    openModal2();
-}
-
-// Função para atualizar um monitor
-function updateMonitor(index, nome, email, cargo) {
-    const row = tbody.children[index];
-    row.children[0].innerText = nome;
-    row.children[1].innerText = email;
-    row.children[2].innerText = cargo;
-}
-
-// Função para excluir um monitor
-function deleteMonitor(button) {
-    const row = button.closest("tr");
-    row.remove();
-}
-
-// Fecha o modal quando o usuário clica fora dele
+// Fecha modal ao clicar fora dele
 modalContainer.addEventListener("click", function(event) {
     if (event.target === modalContainer) {
         closeModal();
     }
 });
 
+// Carregar Monitores ao Carregar a Página
+window.onload = loadMonitors;
